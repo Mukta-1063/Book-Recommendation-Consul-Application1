@@ -1,0 +1,68 @@
+#include <iostream>
+
+using namespace std;
+struct Node {
+    int data;
+    Node* next;
+
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+class LinkedList {
+private:
+    Node* head;
+public:
+    LinkedList() {
+        head = nullptr;
+    }
+
+    void insertAtPosition(int position, int value) {
+        Node* newNode = new Node(value);
+
+        if (position == 0) {
+            newNode->next = head;
+            head = newNode;
+            return;
+        }
+
+        Node* current = head;
+        int count = 0;
+        while (current != nullptr && count < position - 1) {
+            current = current->next;
+            count++;
+        }
+
+        if (current == nullptr) {
+            cout << "Position out of range." << endl;
+            return;
+        }
+
+        newNode->next = current->next;
+        current->next = newNode;
+    }
+
+    void display() {
+        Node* current = head;
+        while (current != nullptr) {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    LinkedList myList;
+    myList.insertAtPosition(0, 1);
+    myList.insertAtPosition(1, 3);
+    myList.insertAtPosition(1, 2);
+    myList.insertAtPosition(3, 4);
+
+    cout << "Linked List: ";
+    myList.display();
+}
+
+
