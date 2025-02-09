@@ -1,0 +1,91 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+class Book {
+public:
+    string title;
+    string author;
+    string genre;
+    string description;
+    float rating;
+
+    Book(string t, string a, string g, string d, float r)
+        : title(t), author(a), genre(g), description(d), rating(r) {}
+
+
+    void displayInfo() const {
+        cout << "Title: " << title << endl;
+        cout << "Author: " << author << endl;
+        cout << "Genre: " << genre << endl;
+        cout << "Description: " << description << endl;
+        cout << "Rating: " << rating << "/5" << endl;
+        cout << "------------------------" << endl;
+    }
+};
+
+
+void filterByGenre(const vector<Book>& books, const string& genre) {
+    cout << "\nBooks in the genre: " << genre << endl;
+    cout << "------------------------" << endl;
+    bool found = false;
+    for (const auto& book : books) {
+        if (book.genre == genre) {
+            book.displayInfo();
+            found = true;
+        }
+    }
+    if (!found) {
+        cout << "No books found in the genre: " << genre << endl;
+    }
+}
+
+void filterByAuthor(const vector<Book>& books, const string& author) {
+    cout << "\nBooks by author: " << author << endl;
+    cout << "------------------------" << endl;
+    bool found = false;
+    for (const auto& book : books) {
+        if (book.author == author) {
+            book.displayInfo();
+            found = true;
+        }
+    }
+    if (!found) {
+        cout << "No books found by the author: " << author << endl;
+    }
+}
+
+int main() {
+    vector<Book> bookList = {
+        Book("The Great Gatsby", "F. Scott Fitzgerald", "Fiction", "A story about the Jazz Age.", 4.4),
+        Book("1984", "George Orwell", "Dystopian", "A dystopian novel about totalitarianism.", 4.7),
+        Book("To Kill a Mockingbird", "Harper Lee", "Classic", "A novel about racial injustice.", 4.8),
+        Book("The Catcher in the Rye", "J.D. Salinger", "Fiction", "A story of teenage rebellion.", 4.1),
+        Book("Pride and Prejudice", "Jane Austen", "Romance", "A classic romantic tale.", 4.5)
+    };
+
+
+    string choice;
+    cout << "Welcome to the Book Recommendation System!" << endl;
+    cout << "Would you like to search by genre or author? (type 'genre' or 'author'): ";
+    cin >> choice;
+
+    if (choice == "genre") {
+        string genre;
+        cout << "Enter the genre you want to search: ";
+        cin.ignore();
+        getline(cin, genre);
+        filterByGenre(bookList, genre);
+    } else if (choice == "author") {
+        string author;
+        cout << "Enter the author you want to search: ";
+        cin.ignore();
+        getline(cin, author);
+        filterByAuthor(bookList, author);
+    } else {
+        cout << "Invalid choice! Please restart the program." << endl;
+    }
+
+    return 0;
+}
