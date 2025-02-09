@@ -1,0 +1,50 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+// Book class definition
+class Book {
+public:
+    // Attributes
+    string title;
+    string author;
+    string genre;
+    string description;
+    float rating;
+
+    // Constructor
+    Book(string t, string a, string g, string d, float r)
+        : title(t), author(a), genre(g), description(d), rating(r) {}
+
+    // Display book information
+    void displayInfo() const {
+        cout << "Title: " << title << endl;
+        cout << "Author: " << author << endl;
+        cout << "Genre: " << genre << endl;
+        cout << "Description: " << description << endl;
+        cout << "Rating: " << rating << "/5" << endl;
+        cout << "------------------------" << endl;
+    }
+};
+
+int main() {
+    // Step 1: Create sample books
+    vector<Book> bookList = {
+        Book("The Great Gatsby", "F. Scott Fitzgerald", "Fiction", "A story about the Jazz Age.", 4.4),
+        Book("1984", "George Orwell", "Dystopian", "A dystopian novel about totalitarianism.", 4.7),
+        Book("To Kill a Mockingbird", "Harper Lee", "Classic", "A novel about racial injustice.", 4.8),
+        Book("The Catcher in the Rye", "J.D. Salinger", "Fiction", "A story of teenage rebellion.", 4.1),
+        Book("Pride and Prejudice", "Jane Austen", "Romance", "A classic romantic tale.", 4.5)
+    };
+
+    // Step 2: Display all sample books
+    cout << "Book List:" << endl;
+    cout << "------------------------" << endl;
+    for (const auto& book : bookList) {
+        book.displayInfo();
+    }
+
+    return 0;
+}
